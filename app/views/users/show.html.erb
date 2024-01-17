@@ -3,17 +3,21 @@
     <div class="row">
         <div class="col-md-3">
            <h2>User info</h2>
+           
            <table class="table"> 
+              <tr></tr> 
               <tr>
                   <th>name</th>
-                   <td></td>
+                   <th></th> 
               </tr>
               <tr>
                   <th>introduction</th>
-                  <td></td>
+                  <th></th>
               </tr>
            </table>
-
+<div class="row">
+    <%= link_to edit_user_path(current_user.id), class: "btn btn-outline-secondary btn-block" do %><i class="fas fa-user-cog"></i><% end %>
+</div>
 <h2 class="mt-3">New book</h2>
 <%= form_with model: Book.new do |f| %>
   <div class="form-group">
