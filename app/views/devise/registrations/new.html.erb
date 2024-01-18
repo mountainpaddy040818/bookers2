@@ -1,4 +1,15 @@
+<div>
+  <%= flash[:notice]%>
+</div>
 <h2>Sign up</h2>
+<% if @user.errors.any? %>
+  <%= @user.errors.count %>errors prohibited this obj from being saved:
+  <ul>
+    <% @user.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>  
+  </ul>
+<% end %>  
 
 <%= form_with model: @user, url: user_registration_path do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>

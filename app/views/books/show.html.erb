@@ -1,19 +1,34 @@
-<%= render 'list', books: @books %>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+<%= render 'list', book: @book, user: @user %>
+        </div>
 
 <div class="col-md-8 offset-md-1">
     <h2>Book detail</h2>
-    <table class="table"> 
+    <table class="table">
     <tr>
         <td>
             <%= image_tag @user.get_profile_image(100,100)%>
-        <br> 
+        <br>
             <%= @user.name %>
         </td>
         <td>
-            <%= link_to book.title, book_path(book.id) %>
+            <%= link_to @book_show.title, book_path(@book_show.id) %>
         </td>
         <td>
-            <%= book.body %>
+            <%= @book_show.body %>
         </td>
+        <td>
+             <%= link_to edit_book_path(@book_show.id), class: "btn btn-sm btn-success" do %>Edit<% end %>
+        </td>
+        <td>
+            <% if @book.user == current_user %>
+              <%= link_to book_path(@book_show.id), class: "btn btn-sm btn-danger", method: :delete do %>Destroy<% end %>
+            <% end %>  
+        </td>
+
     </tr>
+</div>
+</div>
 </div>
