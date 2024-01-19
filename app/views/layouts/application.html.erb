@@ -25,37 +25,45 @@
         <ul class="navbar-nav ml-auto">
             <% if user_signed_in? %>
               <li>
-                <%= link_to user_path(current_user.id), class: "nav-link text-light" do %><i class="fa-solid fa-home"></i>Home<% end %>
+                <%= link_to user_path(current_user.id), class: "nav-link text-light" do %>
+                <i class="fa-solid fa-home"></i>Home<% end %>
               </li>
 
               <li>
-                <%= link_to "/users", class: "nav-link text-light" do %><i class="fa-solid fa-users"></i>Users<% end %>
+                <%= link_to "/users", class: "nav-link text-light" do %>
+                <i class="fa-solid fa-users"></i>Users<% end %>
               </li>
 
               <li>
-                <%= link_to "/books", class: "nav-link text-light" do %><i class="fa-solid fa-book-open"></i>Books<% end %>
+                <%= link_to "/books", class: "nav-link text-light" do %>
+                <i class="fa-solid fa-book-open"></i>Books<% end %>
               </li>
 
               <li>
-                <%= link_to destroy_user_session_path, method: :delete, class: "nav-link text-light" do %><i class="fa-solid fa-sign-out-alt"></i>Log out<% end %>
+                <%= link_to destroy_user_session_path, method: :delete, class: "nav-link text-light" do %>
+                <i class="fa-solid fa-sign-out-alt"></i>Log out<% end %>
               </li>
 
             <% else %>
 
               <li>
-                <%= link_to root_path, class: "nav-link text-light" do %><i class="fa-solid fa-home"></i>Home<% end %>
+                <%= link_to root_path, class: "nav-link text-light" do %>
+                <i class="fa-solid fa-home"></i>Home<% end %>
               </li>
 
               <li>
-                <%= link_to "/homes/about", class: "nav-link text-light" do %><i class="fa-solid fa-link"></i>About<% end %>
+                <%= link_to about_path, class: "nav-link text-light" do %>
+                <i class="fa-solid fa-link"></i>About<% end %>
               </li>
 
               <li>
-                <%= link_to "/users/sign_up", class: "nav-link text-light" do %><i class="fa-solid fa-user-plus"></i>Sign up<% end %>
+                <%= link_to new_user_registration_path , class: "nav-link text-light" do %>
+                <i class="fa-solid fa-user-plus"></i>Sign up<% end %>
               </li>
 
               <li>
-                <%= link_to "/users/sign_in", class: "nav-link text-light" do %><i class="fa-solid fa-sign-in-alt"></i>Log in<% end %>
+                <%= link_to new_user_session_path , class: "nav-link text-light" do %>
+                <i class="fa-solid fa-sign-in-alt"></i>Log in<% end %>
               </li>
 
             <% end %>
@@ -66,6 +74,9 @@
     </header>
 
    <main class="mb-auto">
+     <% flash.each do |message_type, message| %>
+        <div class="flash-message <%= message_type %>"><%= message %></div>
+      <% end %>
     <%= yield %>
    </main>
 

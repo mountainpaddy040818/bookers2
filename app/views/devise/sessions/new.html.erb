@@ -7,14 +7,14 @@
 
 <h2>Log in</h2>
 
-<% if @user.errors.any? %>
-  <%= @user.errors.count %>errors prohibited this obj from being saved:
-  <ul>
-    <% @user.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-    <% end %>
-  </ul>
-<% end %>
+<!--<% if @user.errors.any? %>-->
+<!--  <%= @user.errors.count %>errors prohibited this obj from being saved:-->
+<!--  <ul>-->
+<!--    <% @user.errors.full_messages.each do |message| %>-->
+<!--      <li><%= message %></li>-->
+<!--    <% end %>-->
+<!--  </ul>-->
+<!--<% end %>-->
 
 <%= form_with model: @user, url: user_session_path do |f| %>
   <div class="field">

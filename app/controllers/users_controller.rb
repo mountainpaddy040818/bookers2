@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
-  before_action :is_matching_login_user, only: [:edit, :update,]
+  before_action :is_matching_login_user, only: [:edit, :update, :destroy]
   
   def new
     @user = User.new(user_params) 
@@ -15,7 +15,7 @@ class UsersController < ApplicationController
   
   def index
     @users = User.all
-    @user = current_user
+    @user = User.find(current_user.id)
     @books = Book.all
     @book = Book.new
   end 
@@ -28,26 +28,20 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
-    is_matching_login_user
   end
   
   def update
-    is_matching_login_user
     @user = User.find(params[:id])
     if @user.update(user_params)
       flash[:notice] = "You have updated user successfully."
-      redirect_to "/users/#{current_user.id}"
+      redirect_to user_path(@user.id)
     else
       flash[:notice] = "errors prohibited this obj from being saved:"
-      render :edit
+      render "users/edit"
     end 
   end 
   
   private
-  
-  def book_params
-    params.require(:book).permit(:title, :body)
-  end 
   
   def user_params
     params.require(:user).permit(:name, :profile_image, :introduction)
@@ -56,7 +50,7 @@ class UsersController < ApplicationController
   def is_matching_login_user
     user = User.find(params[:id])
     unless user.id == current_user.id
-      redirect_to book_path
+      redirect_to user_path(current_user.id) 
     end 
   end 
   

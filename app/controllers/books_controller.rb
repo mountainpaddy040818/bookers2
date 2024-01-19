@@ -1,6 +1,6 @@
 class BooksController < ApplicationController
   before_action :authenticate_user!
-  # before_action :is_matching_login_user, {only: [:edit, :update, :destroy]}
+  before_action :is_matching_login_user, only: [:edit, :update, :destroy]
 
   def create
     @book = Book.new(book_params)
@@ -9,21 +9,21 @@ class BooksController < ApplicationController
       flash[:notice] = "You have created book successfully."
       redirect_to book_path(@book.id)
     else
-      @user = current_user
+      @user = User.find(current_user.id)
       @books = Book.all
       flash[:notice] = "errors prohibited this obj from being saved;"
-      render :index
+      render "books/index"
     end
   end
 
   def index
     @books = Book.all
     @book = Book.new
-    @user = current_user
+    @user = User.find(current_user.id)
   end
 
   def show
-    @user = current_user
+    @user = User.find(current_user.id)
     @book_show = Book.find(params[:id])
     @book = Book.new
   end
@@ -40,14 +40,14 @@ class BooksController < ApplicationController
     else
       @books = Book.all
       flash[:notice] = "errors prohibited this obj from being saved:"
-      render :edit
+      render "books/edit"
     end
   end
 
   def destroy
-    @book = Book.find(params[:id])
-    @book.destroy
-    redirect_to '/books', notice: '本を削除しました。'
+    book = Book.find(params[:id])
+    book.destroy
+    redirect_to books_path, notice: '本を削除しました。'
   end
 
   private
@@ -56,15 +56,11 @@ class BooksController < ApplicationController
     params.require(:book).permit(:title, :body)
   end
 
-  def user_params
-    params.require(:user).permit(:name, :profile_image, :introduction)
+  def is_matching_login_user
+    book = Book.find[:id]
+    if book.user_id == current_user.id
+      redirect_to books_path, alert: '他のユーザーの投稿は編集できません。'
+    end
   end
-
-  # def is_matching_login_user
-    # @book = Book.find[:id]
-    # if @book.user_id != current_user.id
-      # redirect_to root_path, alert: '他のユーザーの投稿は編集できません。'
-    # end
-  # end
 
 end

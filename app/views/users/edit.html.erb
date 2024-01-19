@@ -1,14 +1,12 @@
-<div>
-  <%= flash[:notice]%>
-</div>
-<% if @user.errors.any? %>
-  <%= @user.errors.count %>errors prohibited this obj from being saved:
-  <ul>
-    <% @user.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-    <% end %>
-  </ul>
-<% end %>
+<!--<% if @user.errors.any? %>-->
+  <!--<%= @user.errors.count %>errors prohibited this obj from being saved:-->
+  <!--<ul>-->
+    <!--<% @user.errors.full_messages.each do |message| %>-->
+      <!--<li><%= message %></li>-->
+    <!--<% end %>-->
+  <!--</ul>-->
+<!--<% end %>-->
+<div class="center">
 <div class="container">
   <div class="row">
     <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
@@ -32,4 +30,5 @@
       <% end %>
     </div>
   </div>
+</div>
 </div>
