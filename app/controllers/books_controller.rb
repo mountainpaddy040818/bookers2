@@ -1,6 +1,6 @@
 class BooksController < ApplicationController
   before_action :authenticate_user!
-  before_action :ensure_current_user, {only: [:edit, :update, :destroy]}
+  # before_action :is_matching_login_user, {only: [:edit, :update, :destroy]}
 
   def create
     @book = Book.new(book_params)
@@ -40,14 +40,14 @@ class BooksController < ApplicationController
     else
       @books = Book.all
       flash[:notice] = "errors prohibited this obj from being saved:"
-      render "edit"
+      render :edit
     end
   end
 
   def destroy
     @book = Book.find(params[:id])
     @book.destroy
-    redirect_to '/books'
+    redirect_to '/books', notice: '本を削除しました。'
   end
 
   private
@@ -60,11 +60,11 @@ class BooksController < ApplicationController
     params.require(:user).permit(:name, :profile_image, :introduction)
   end
 
-  def ensure_current_user
-    @book = Book.find(params[:id])
-    if @book.user_id != current_user.id
-      redirect_to books_path
-    end
-  end
+  # def is_matching_login_user
+    # @book = Book.find[:id]
+    # if @book.user_id != current_user.id
+      # redirect_to root_path, alert: '他のユーザーの投稿は編集できません。'
+    # end
+  # end
 
 end
