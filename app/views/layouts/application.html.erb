@@ -40,8 +40,11 @@
               </li>
 
               <li>
-                <%= link_to destroy_user_session_path, method: :delete, class: "nav-link text-light" do %>
-                <i class="fa-solid fa-sign-out-alt"></i>Log out<% end %>
+                <% if current_user %>
+                  <%= link_to destroy_user_session_path, class: "nav-link text-light", method: :delete do %>
+                  <i class="fa-solid fa-sign-out-alt"></i>Log out
+                  <% end %>
+                <% end %>
               </li>
 
             <% else %>
@@ -52,7 +55,7 @@
               </li>
 
               <li>
-                <%= link_to about_path, class: "nav-link text-light" do %>
+                <%= link_to about_path , class: "nav-link text-light" do %>
                 <i class="fa-solid fa-link"></i>About<% end %>
               </li>
 

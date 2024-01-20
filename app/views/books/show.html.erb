@@ -11,18 +11,23 @@
         <thead></thead>
     <tbody>
     <tr>
+
         <td>
-            <%= image_tag @user.get_profile_image(100,100)%>
-        <br>
-            <%= link_to @user.name, user_path(@user.id) %>
+            <%= link_to user_path(@book_show.user.id) do %>
+            <%= image_tag @user.get_profile_image(100,100) %><br>
+            <%= @user.name %>
+            <% end %>
         </td>
+        <br>
         <td>
             <%= link_to @book_show.title, book_path(@book_show.id) %>
         </td>
         <td>
             <%= @book_show.body %>
         </td>
-        <% if @book.user_id == current_user.id %>
+
+        <% if @user == current_user %>
+
         <td>
              <%= link_to edit_book_path(@book_show.id),
              class: "btn btn-sm btn-success" do %>Edit

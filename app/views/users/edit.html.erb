@@ -1,28 +1,27 @@
-<!--<% if @user.errors.any? %>-->
-  <!--<%= @user.errors.count %>errors prohibited this obj from being saved:-->
-  <!--<ul>-->
-    <!--<% @user.errors.full_messages.each do |message| %>-->
-      <!--<li><%= message %></li>-->
-    <!--<% end %>-->
-  <!--</ul>-->
-<!--<% end %>-->
-<div class="center">
+<% if @user.errors.any? %>
+  <%= @user.errors.count %>errors prohibited this obj from being saved:
+  <ul>
+    <% @user.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
 <div class="container">
   <div class="row">
     <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
       <h2>User info</h2>
       <%= form_with model: @user do |f| %>
       <div class="form-group">
-      <%= f.label :name, "Name"%><br>
-      <%= f.text_field :name, autofocus: true, id: "user_name", placeholder: "Name" %>
+      <%= f.label :name, "Name" %><br>
+      <%= f.text_field :name, class: "form-control name", autofocus: true, id: "user_name", placeholder: "Name" %>
       </div>
       <div class="form-group">
       <%= f.label :user_image, "Image" %><br>
-      <%= f.file_field :profile_image, placeholder: "Image", accept: "image/*" %>
+      <%= f.file_field :profile_image, class: "form-control-file user_image", placeholder: "Image", accept: "image/*" %>
       </div>
       <div class="form-group">
       <%= f.label :introduction, "Introduction" %><br>
-      <%= f.text_area :introduction, placeholder: "Introduction" %>
+      <%= f.text_area :introduction, class: "form-control introduction", placeholder: "Introduction" %>
       </div>
       <div class="form-group">
         <%= f.submit "Update User", class: "btn btn-secondary" %>
@@ -30,5 +29,4 @@
       <% end %>
     </div>
   </div>
-</div>
 </div>

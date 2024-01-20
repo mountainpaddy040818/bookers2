@@ -1,12 +1,12 @@
-<!--<%= flash[:notice] %>-->
-<!--<% if book.errors.any? %>-->
-  <!--<%= book.errors.count %>errors prohibited this book from being saved:-->
-  <!--<ul>-->
-    <!--<% book.errors.full_messages.each do |message| %>-->
-    <!--<li><%= message %></li>-->
-    <!--<% end %>-->
-  <!--</ul>-->
-  <!--<% end %>-->
+<% if book.errors.any? %>
+  <%= book.errors.count %>errors prohibited this book from being saved:
+  <ul>
+    <% book.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+    <% end %>
+  </ul>
+  <% end %>
+
 　　　　  <h2>User info</h2>
            <%= image_tag user.get_profile_image(100,100) %>
            <table class="table">

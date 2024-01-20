@@ -23,8 +23,8 @@ class BooksController < ApplicationController
   end
 
   def show
-    @user = User.find(current_user.id)
     @book_show = Book.find(params[:id])
+    @user = @book_show.user
     @book = Book.new
   end
 
@@ -47,7 +47,7 @@ class BooksController < ApplicationController
   def destroy
     book = Book.find(params[:id])
     book.destroy
-    redirect_to books_path, notice: '本を削除しました。'
+    redirect_to books_path
   end
 
   private
@@ -57,8 +57,8 @@ class BooksController < ApplicationController
   end
 
   def is_matching_login_user
-    book = Book.find[:id]
-    if book.user_id == current_user.id
+    book = Book.find(params[:id])
+    unless book.user_id == current_user.id
       redirect_to books_path, alert: '他のユーザーの投稿は編集できません。'
     end
   end
